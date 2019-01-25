@@ -3,3 +3,6 @@
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/BOP_React_v17.iml
 *.xml
+node_modules
+dist
+package-lock.json

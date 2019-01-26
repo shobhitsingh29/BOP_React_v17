@@ -1,9 +1,36 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import style from "./search.scss"
+import App from "./app"
 
-const Index = () => {
-  return <div className={style.nameOfYourCSSClass}>Hello React !</div>;
+
+import { Provider } from 'react-redux';
+import configureStore from './state/store';
+
+import { BrowserRouter } from 'react-router-dom';
+
+const rootEl = document.getElementById('index');
+
+const store = configureStore();
+
+const render = Component => {
+  return ReactDOM.render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Component />
+        </BrowserRouter>
+      </Provider>,
+      rootEl
+  );
 };
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+render(App);
+
+if (module.hot) {
+  module.hot.accept('./app', () => {
+    const NextApp = require('./app').default;
+    ReactDOM.render(
+        <NextApp />,
+        rootEl
+    )
+  })
+}
